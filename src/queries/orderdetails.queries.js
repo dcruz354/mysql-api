@@ -19,7 +19,7 @@ exports.CREATE_ORDERDETAILS_TABLE = `CREATE TABLE IF NOT EXISTS orderdetails(
     customerName varchar(255) NOT NULL,
     created_date DATETIME DEFAULT CURRENT_TIMESTAMP(),
     status varchar(10) DEFAULT 'pending',
-    comments varchar(255) NOT NULL,
+    comments varchar(255) DEFAULT NULL,
     PRIMARY KEY (orderNumber)
   )`;
 
@@ -46,7 +46,7 @@ exports.INSERT_ODERDETAILS = `INSERT INTO orderdetails (customerName) VALUES (?)
  *
  * NOTE: omitting `WHERE` will result in updating every existing entry.
  */
-exports.UPDATE_ODERDETAILS = `UPDATE orderdetails SET customerName = ?, status = ? WHERE orderNumber = ?`;
+exports.UPDATE_ODERDETAILS = `UPDATE orderdetails SET customerName = ?, comments = ? WHERE orderNumber = ?`;
 
 // Delete a orderdetails by orderNumber
 exports.DELETE_ODERDETAILS = `DELETE FROM orderdetails WHERE orderNumber = ?`;

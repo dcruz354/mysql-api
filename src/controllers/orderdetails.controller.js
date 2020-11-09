@@ -41,6 +41,7 @@ exports.createOrderDetails = function(req, res) {
       res.send(err);
     }
     console.log(result);
+    //res.json({ message: 'Number of records inserted: '  });
     res.json({ message: 'Number of records inserted: ' + result.affectedRows });
   });
 };
@@ -56,7 +57,7 @@ exports.createOrderDetails = function(req, res) {
 exports.updateOrderDetails = function(req, res) {
   con.query(
     queries.UPDATE_ODERDETAILS,
-    [req.body.customerName, req.body.status, req.params.orderNumber],
+    [req.body.customerName, req.body.comments, req.params.orderNumber],
     function(err, data) {
       if (err) {
         res.send(err);
