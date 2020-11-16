@@ -1,5 +1,6 @@
 const mysql = require('mysql');
 const queries = require('./queries/orderdetails.queries');
+const authQueries = require('./queries/auth.queries');
 
 // Get the Host from Environment or use default
 const host = process.env.DB_HOST || 'localhost';
@@ -25,10 +26,15 @@ const con = mysql.createConnection({
 con.connect(function(err) {
     if (err) throw err;
     console.log('Connected!');
+
+    con.query(authQueries.CREATE_USERS_TABLE, function(err, result) {
+      if (err) throw err;
+      console.log('Users table created or exists already!');
+    });
   
     con.query(queries.CREATE_ORDERDETAILS_TABLE, function(err, result) {
       if (err) throw err;
-      console.log('Table created or exists already!');
+      console.log('Orderdetails table created or exists already!');
     });
   });
   
