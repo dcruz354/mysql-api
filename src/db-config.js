@@ -1,6 +1,7 @@
 const mysql = require('mysql');
-const queries = require('./queries/orderdetails.queries');
-const authQueries = require('./queries/auth.queries');
+const { CREATE_ORDERDETAILS_TABLE } = require('./queries/orderdetails.queries');
+const { CREATE_USERS_TABLE } = require('./queries/user.queries');
+const query = require('./utils/query');
 
 // Get the Host from Environment or use default
 const host = process.env.DB_HOST || 'localhost';
@@ -14,28 +15,46 @@ const password = process.env.DB_PASS || 'pass123';
 // Get the Database from Environment or use default
 const database = process.env.DB_DATABASE || 'orderdb';
 
-// Create the connection with required details
-const con = mysql.createConnection({
-    host,
-    user,
-    password,
-    database
+const connection = async () =>
+  new Promise((resolve, reject) => {
+    const con = mysql.createConnection({
+      host,
+      user,
+      password,
+      database,
+    });
+
+    con.connect((err) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+    });
+
+    resolve(con);
   });
 
-  // Connect to the database.
-con.connect(function(err) {
-    if (err) throw err;
-    console.log('Connected!');
-
-    con.query(authQueries.CREATE_USERS_TABLE, function(err, result) {
-      if (err) throw err;
-      console.log('Users table created or exists already!');
-    });
-  
-    con.query(queries.CREATE_ORDERDETAILS_TABLE, function(err, result) {
-      if (err) throw err;
-      console.log('Orderdetails table created or exists already!');
-    });
+  // Create the connection with required details
+(async () => {
+  const _con = await connection().catch((err) => {
+    throw err;
   });
-  
-  module.exports = con;
+
+  const userTableCreated = await query(_con, CREATE_USERS_TABLE).catch(
+    (err) => {
+      console.log(err);
+    }
+  );
+
+  const orderdetailsTableCreated = await query(_con, CREATE_ORDERDETAILS_TABLE).catch(
+    (err) => {
+      console.log(err);
+    }
+  );
+
+  if (!!userTableCreated && !!orderdetailsTableCreated) {
+    console.log('Tables Created!');
+  }
+})();
+
+module.exports = connection;

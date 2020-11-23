@@ -16,11 +16,13 @@
  */
 exports.CREATE_ORDERDETAILS_TABLE = `CREATE TABLE IF NOT EXISTS orderdetails(
     orderNumber int NOT NULL AUTO_INCREMENT,
+    user_id int NOT NULL,
     customerName varchar(255) NOT NULL,
     created_date DATETIME DEFAULT CURRENT_TIMESTAMP(),
     status varchar(10) DEFAULT 'pending',
     comments varchar(255) DEFAULT NULL,
-    PRIMARY KEY (orderNumber)
+    PRIMARY KEY (orderNumber),
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
   )`;
 
   // Get every Order Details
