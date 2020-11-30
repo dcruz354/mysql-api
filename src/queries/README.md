@@ -14,20 +14,33 @@ user_name	User's name
 password	User's password (non-unique)
 Example:
 
-+----+-----------+----------+
-| id | user_name | password |
-+----+-----------+----------+
-|  1 | admin     | 123456   |
-|  2 | mworrell  | derp     |
-+----+-----------+----------+
++----------+--------------+------+-----+---------+----------------+
+| Field    | Type         | Null | Key | Default | Extra          |
++----------+--------------+------+-----+---------+----------------+
+| user_id  | int          | NO   | PRI | NULL    | auto_increment |
+| username | varchar(255) | NO   | UNI | NULL    |                |
+| email    | varchar(255) | NO   |     | NULL    |                |
+| password | varchar(255) | NO   |     | NULL    |                |
++----------+--------------+------+-----+---------+----------------+
 
-Orderdetails Table Schema
-The orderdetails table will be represented by the following Schema:
+Orders Table Schema
+The orders table will be represented by the following Schema:
 
 Column	Description
-    orderNumber int NOT NULL AUTO_INCREMENT,
-    customerName varchar(255) NOT NULL,
+    order_number int NOT NULL AUTO_INCREMENT,
+    order_name varchar(255) NOT NULL,
     created_date DATETIME DEFAULT CURRENT_TIMESTAMP(),
     status varchar(10) DEFAULT 'pending',
-    comments varchar(255) DEFAULT NULL,
-    PRIMARY KEY (orderNumber)
+    PRIMARY KEY (order_number)
+
+    Example:
+
+    +--------------+--------------+------+-----+-------------------+-------------------+
+    | Field        | Type         | Null | Key | Default           | Extra             |
+    +--------------+--------------+------+-----+-------------------+-------------------+
+    | order_number | int          | NO   | PRI | NULL              | auto_increment    |
+    | user_id      | int          | NO   | MUL | NULL              |                   |
+    | order_name   | varchar(255) | NO   |     | NULL              |                   |
+    | created_date | datetime     | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
+    | status       | varchar(10)  | YES  |     | pending           |                   |
+    +--------------+--------------+------+-----+-------------------+-------------------+

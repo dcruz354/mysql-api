@@ -1,10 +1,11 @@
-/* const chai = require('chai');
+const chai = require('chai');
 const expect = chai.expect;
 const chaiHttp = require('chai-http');
 
 chai.use(chaiHttp);
 
 describe('Auth API service', () => {
+/*
   // run one time then skip once working
   it.skip('should POST a new user', (done) => {
     const testUser = {
@@ -42,6 +43,7 @@ describe('Auth API service', () => {
         done();
       });
   });
+  
 
   it('should POST a login for an existing', (done) => {
     const testUser = {
@@ -62,5 +64,5 @@ describe('Auth API service', () => {
         done();
       });
   });
+*/
 });
- */

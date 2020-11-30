@@ -1,13 +1,15 @@
-/* const chai = require('chai');
+const chai = require('chai');
 const expect = chai.expect;
 const chaiHttp = require('chai-http');
 
 chai.use(chaiHttp);
 
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjA2MTExNDA5LCJleHAiOjE2MDYxOTc4MDl9.4LTL4wTR6L5OumIkUMlEaSuAD-mgRA0M2YrKzEUcROI';
+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjA2NzEzNDU2LCJleHAiOjE2MDY3OTk4NTZ9.ZdD2v5_3L_NSxzf67WvC0XQpCxJFUybJwiVpfS2PnkM';
 
 describe('User API service', () => {
+
+/*
   it("should GET a logged in user's unique id, username, and password", (done) => {
     const expected = [
       {
@@ -27,8 +29,10 @@ describe('User API service', () => {
       });
   });
 
+  
+
   // run one time then skip once working
-  it.skip('should PUT updated credentials for a logged in user', (done) => {
+  it('should PUT updated credentials for a logged in user', (done) => {
     const updatedUser = {
       username: 'admin2',
       password: 'newPassword',
@@ -47,6 +51,8 @@ describe('User API service', () => {
       });
   });
 
+ 
+  
   it('should PUT updated credentials for a logged in user', (done) => {
     const updatedUser = {
       username: 'admin2',
@@ -65,4 +71,5 @@ describe('User API service', () => {
         done();
       });
   });
-}); */
+ */
+});

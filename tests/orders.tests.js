@@ -4,11 +4,17 @@ const chaiHttp = require('chai-http');
 
 chai.use(chaiHttp);
 
-describe('Orderdetails API Service', function () {
-    /* it('should GET all orderdetails', function (done) {
+//const token =
+// 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjA2NzE0MDA3LCJleHAiOjE2MDY4MDA0MDd9.TiTQxbgVnYWfksB7EhCLEgYXFnTVDi04l8eXTrUOa30';
+
+describe('Orders API Service', function () {
+
+ /*
+    it('should GET all orders', function (done) {
       chai
         .request('http://localhost:3000')
-        .get('/api/orderdetails')
+        .get('/api/orders')
+        .set('Authorization', `Bearer ${token}`)
         .end(function (err, resp) {
           expect(resp.status).to.be.eql(200);
           expect(resp.body).to.be.a('array');
@@ -16,20 +22,21 @@ describe('Orderdetails API Service', function () {
           done();
         });
     });
+
   
-    it('should GET a single orderdetail', function (done) {
+    it('should GET a single order', function (done) {
       const expected = [
         {
-          orderNumber: 1,
-          customerName: "I'm the first task!",
-          created_date: '2020-03-24T05:09:49.000Z',
-          status: 'completed',
+          order_number: 1,
+          order_name: "I'm the first order!",
+          created_date: '2020-11-29 22:30:27',
+          status: 'pending',
         },
       ];
   
       chai
         .request('http://localhost:3000')
-        .get('/api/orderdetails/1')
+        .get('/api/orders/1')
         .end(function (err, resp) {
           expect(resp.status).to.be.eql(200);
           expect(resp.body).to.be.a('array');
@@ -37,22 +44,25 @@ describe('Orderdetails API Service', function () {
           expect(resp.body).to.be.eql(expected);
           done();
         });
-    }); */
+    });
+
   
-    it.skip('should POST a single order detail', function (done) {
-      const newOrderDetail = {
-        customerName: 'Pedro Cruz',
+    it.skip('should POST a single order', function (done) {
+      const newOrder = {
+        order_name: 'New test order!',
       };
-      const expected = { message: 'Add order detail successfully!' };
+      const expected = { msg: 'Add order successfully!' };
   
       chai
         .request('http://localhost:3000')
-        .post('/api/orderdetails')
-        .send(newOrderDetail)
+        .post('/api/orders')
+        .send(newOrder)
         .end(function (err, resp) {
           expect(resp.status).to.be.eql(200);
           expect(resp.body).to.be.eql(expected);
           done();
         });
     });
+
+    */
   });

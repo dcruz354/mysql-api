@@ -1,5 +1,5 @@
 const mysql = require('mysql');
-const { CREATE_ORDERDETAILS_TABLE } = require('./queries/orderdetails.queries');
+const { CREATE_ORDERS_TABLE } = require('./queries/orders.queries');
 const { CREATE_USERS_TABLE } = require('./queries/user.queries');
 const query = require('./utils/query');
 
@@ -33,7 +33,7 @@ const connection = async () =>
 
     resolve(con);
   });
-
+  
   // Create the connection with required details
 (async () => {
   const _con = await connection().catch((err) => {
@@ -46,13 +46,13 @@ const connection = async () =>
     }
   );
 
-  const orderdetailsTableCreated = await query(_con, CREATE_ORDERDETAILS_TABLE).catch(
+  const ordersTableCreated = await query(_con, CREATE_ORDERS_TABLE).catch(
     (err) => {
       console.log(err);
     }
   );
 
-  if (!!userTableCreated && !!orderdetailsTableCreated) {
+  if (!!userTableCreated && !!ordersTableCreated) {
     console.log('Tables Created!');
   }
 })();
