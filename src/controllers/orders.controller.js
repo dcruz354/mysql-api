@@ -30,10 +30,9 @@ exports.getAllOrders = async (req, res) => {
   const orders = await query(con, ALL_ORDERS(req.user.id), []).catch(
     serverError(res)
   );
-
   // [] === true, 0 === false
   if (!orders.length) {
-    res.status(200).json({ msg: 'No orders available for this user.' });
+    return res.status(200).json({ msg: 'No orders available for this user.' });
   }
   res.json(orders);
 };
@@ -82,7 +81,7 @@ exports.createOrder = async (req, res) => {
     );
 
     if (result.affectedRows !== 1) {
-      res
+      return res
         .status(500)
         .json({ msg: `Unable to add order: ${req.body.order_name}` });
     }

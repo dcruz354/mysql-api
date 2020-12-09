@@ -17,7 +17,7 @@ const escape = require('../utils/escape');
 exports.register = async (req, res) => {
   // params setup
   const hash = bcrypt.hashSync(req.body.password);
-  const { username, email, password } = escape({
+  const { username , email, password } = escape({
     ...req.body,
     password: hash,
   });
@@ -44,7 +44,7 @@ exports.register = async (req, res) => {
     ).catch((err) => {
       //   stop registeration
       console.log(err);
-      res
+      return res
         .status(500)
         .json({ msg: 'Could not register user. Please try again later.' });
     });
@@ -70,7 +70,7 @@ exports.login = async (req, res) => {
     GET_ME_BY_USERNAME_WITH_PASSWORD(username)
   ).catch((err) => {
     console.log(err);
-    res.status(500).json({ msg: 'Could not retrieve user.' });
+    return res.status(500).json({ msg: 'Could not retrieve user.' });
   });
 
   // if the user exists
@@ -80,11 +80,11 @@ exports.login = async (req, res) => {
       .compare(password, user[0].password)
       .catch((err) => {
         console.log(err);
-        res.json(500).json({ msg: 'Invalid password!' });
+        return res.json(500).json({ msg: 'Invalid password!' });
       });
 
     if (!validPass) {
-      res.status(400).json({ msg: 'Invalid password!' });
+      return res.status(400).json({ msg: 'Invalid password!' });
     }
     // create token
     const accessToken = generateAccessToken(user[0].user_id, {
