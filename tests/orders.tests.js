@@ -4,13 +4,33 @@ const chaiHttp = require('chai-http');
 
 chai.use(chaiHttp);
 
-//const token =
-// 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjA2NzE0MDA3LCJleHAiOjE2MDY4MDA0MDd9.TiTQxbgVnYWfksB7EhCLEgYXFnTVDi04l8eXTrUOa30';
+const {
+  refreshTokens,
+  generateAccessToken,
+  generateRefreshToken,
+} = require('../src/utils/jwt-helpers');
+
+request_user_id = 1;
+
+const token = generateAccessToken(request_user_id, {
+      expiresIn: 86400,
+});
 
 describe('Orders API Service', function () {
+  it.skip('user does not have oders', function (done) {
+    const expected = { msg: 'No orders available for this user.' }
 
- /*
-    it('should GET all orders', function (done) {
+    chai
+      .request('http://localhost:3000')
+      .get('/api/orders')
+      .set('Authorization', `Bearer ${token}`)
+      .end(function (err, resp) {
+        expect(resp.body).to.eql(expected);
+        done();
+      });
+  });
+  
+  it.skip('should GET all orders', function (done) {
       chai
         .request('http://localhost:3000')
         .get('/api/orders')
@@ -24,19 +44,21 @@ describe('Orders API Service', function () {
     });
 
   
-    it('should GET a single order', function (done) {
+    it.skip('should GET a single order', function (done) {
       const expected = [
         {
           order_number: 1,
-          order_name: "I'm the first order!",
-          created_date: '2020-11-29 22:30:27',
+          order_name: "New test order!",
+          created_date: '2020-12-11T06:45:49.000Z',
           status: 'pending',
+          user_id: 1
         },
       ];
   
       chai
         .request('http://localhost:3000')
         .get('/api/orders/1')
+        .set('Authorization', `Bearer ${token}`)
         .end(function (err, resp) {
           expect(resp.status).to.be.eql(200);
           expect(resp.body).to.be.a('array');
@@ -51,11 +73,12 @@ describe('Orders API Service', function () {
       const newOrder = {
         order_name: 'New test order!',
       };
-      const expected = { msg: 'Add order successfully!' };
+      const expected = { msg: 'Added order successfully!' };
   
       chai
         .request('http://localhost:3000')
         .post('/api/orders')
+        .set('Authorization', `Bearer ${token}`)
         .send(newOrder)
         .end(function (err, resp) {
           expect(resp.status).to.be.eql(200);
@@ -63,6 +86,4 @@ describe('Orders API Service', function () {
           done();
         });
     });
-
-    */
   });

@@ -82,16 +82,17 @@ exports.updateMe = async function (req, res) {
     newPassword,
   });
 
-  // perform update
-  const result = await query(
-    con,
-    UPDATE_USER(escapedUsername, escapedEmail, escapedPassword, req.user.id)
-  ).catch((err) => {
-    console.log(err);
-    res.status(500).json({ msg: 'Could not update user settings.' });
-  });
+  if(username.localeCompare(newUser) !==0 || email.localeCompare(newEmail) !== 0 || !isPasswordSame)
+  {
+    const result = await query(
+      con,
+      UPDATE_USER(escapedUsername, escapedEmail, escapedPassword, req.user.id)
+      
+    ).catch((err) => {
+      console.log(err);
+      res.status(500).json({ msg: 'Could not update user settings.' });
+    });
 
-  if (result.affectedRows === 1) {
     res.json({ msg: 'Updated succesfully!' });
   } else {
     res.json({ msg: 'Nothing to update...' });

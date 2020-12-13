@@ -4,20 +4,27 @@ const chaiHttp = require('chai-http');
 
 chai.use(chaiHttp);
 
-const token =
- 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjA2NzEzNDU2LCJleHAiOjE2MDY3OTk4NTZ9.ZdD2v5_3L_NSxzf67WvC0XQpCxJFUybJwiVpfS2PnkM';
+ const {
+  refreshTokens,
+  generateAccessToken,
+  generateRefreshToken,
+} = require('../src/utils/jwt-helpers');
+
+request_user_id = 1;
+
+const token = generateAccessToken(request_user_id, {
+      expiresIn: 86400,
+});
 
 describe('User API service', () => {
-
-/*
-  it("should GET a logged in user's unique id, username, and password", (done) => {
+ it.skip("should GET a logged in user's unique id, username, and password", (done) => {
     const expected = [
-      {
-        user_id: 1,
-        username: 'admin',
-        email: 'admin@example.com',
-      },
-    ];
+        {
+          user_id: 1,
+          username: 'admin',
+          email: 'admin@example.com',
+        },
+      ];
 
     chai
       .request('http://localhost:3000')
@@ -28,15 +35,13 @@ describe('User API service', () => {
         done();
       });
   });
-
-  
-
+ 
   // run one time then skip once working
-  it('should PUT updated credentials for a logged in user', (done) => {
+  it.skip('should PUT updated credentials for a logged in user', (done) => {
     const updatedUser = {
-      username: 'admin2',
-      password: 'newPassword',
-      email: 'admin@example.com',
+      username: 'admin3',
+      password: 'newPassword3',
+      email: 'admin3@example.com',
     };
     const expected = { msg: 'Updated succesfully!' };
 
@@ -51,12 +56,10 @@ describe('User API service', () => {
       });
   });
 
- 
-  
-  it('should PUT updated credentials for a logged in user', (done) => {
+  it.skip('should SKIP updated credentials for a logged in user', (done) => {
     const updatedUser = {
-      username: 'admin2',
-      password: 'newPassword',
+      username: 'admin',
+      password: 'password',
       email: 'admin@example.com',
     };
     const expected = { msg: 'Nothing to update...' };
@@ -71,5 +74,4 @@ describe('User API service', () => {
         done();
       });
   });
- */
 });

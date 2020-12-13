@@ -5,7 +5,6 @@ const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 
 describe('Auth API service', () => {
-/*
   // run one time then skip once working
   it.skip('should POST a new user', (done) => {
     const testUser = {
@@ -26,7 +25,7 @@ describe('Auth API service', () => {
       });
   });
 
-  it('should not POST a new user if they already exist', (done) => {
+  it.skip('should not POST a new user if they already exist', (done) => {
     const testUser = {
       username: 'admin',
       password: 'password',
@@ -43,9 +42,9 @@ describe('Auth API service', () => {
         done();
       });
   });
-  
 
-  it('should POST a login for an existing', (done) => {
+  
+  it.skip('should POST a login for an existing', (done) => {
     const testUser = {
       username: 'admin',
       password: 'password',
@@ -64,5 +63,4 @@ describe('Auth API service', () => {
         done();
       });
   });
-*/
 });
